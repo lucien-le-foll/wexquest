@@ -1,0 +1,175 @@
+<!doctype html>
+<html ng-app="wexquest" lang="en">
+<head>
+    <base href="/">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Wexquest</title>
+
+    <link rel="icon" sizes="192x192" href="img/logo/launcher-icon-4x.png">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a ng-href="/" class="brand-logo center"><img src="img/logo/logo.svg" alt="wexquest"></a>
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            </div>
+            <ul id="slide-out" class="side-nav">
+                <li><a ng-href="/">Home</a></li>
+                <li><a ng-href="/camera">Camera</a></li>
+                <li><a ng-href="/resume">Resume</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main ng-controller="mainController as main">
+    <div class="row" ng-view>
+
+    </div>
+    <div id="mapModal" class="modal">
+        <div class="row">
+            <h4 class="center amber white-text">{{ main.mapTitle }}</h4>
+        </div>
+        <div class="row container">
+            <ui-gmap-google-map center='main.map.center' zoom='main.map.zoom'>
+                <ui-gmap-marker idKey="1" coords="main.map.center"></ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+    </div>
+    <div id="loginModal" class="modal">
+        <div class="row container">
+            <div class="row"></div>
+            <h4 class="center">Welcome</h4>
+            <p>
+                Please do login to see your latest progress, or create an account to begin the journey !
+            </p>
+        </div>
+        <div class="row">
+            <div class="col s12 input-field">
+                <label for="email">Login</label>
+                <input type="email" id="email">
+            </div>
+            <div class="col s12 input-field">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+            </div>
+            <div class="row">
+                <div class="col s6">
+                    <a ng-href="/signin" onclick="closeLogin()" class="btn-flat waves-light waves-effect">Sign In</a>
+                </div>
+                <div class="col s6">
+                    <a class="btn waves-light waves-effect" onclick="verifyLogin()">Log In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+
+</footer>
+
+<!-- importing angular, ngRoute and our application -->
+<script src="js/bin/lodash.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+<script src="js/bin/angular-logger.min.js"></script>
+<script src="js/bin/angular-google-maps.min.js"></script>
+
+<script src="js/bin/angular-camera.min.js"></script>
+<script src="app/app.js"></script>
+
+<script src='//maps.googleapis.com/maps/api/js'></script>
+
+<!-- importing JQuery and Materialize -->
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/bin/materialize.js"></script>
+
+<!-- popping out the login screen when the page loads -->
+<script>
+    $(document).ready(function(){
+        $('#loginModal').openModal();
+        $(".button-collapse").sideNav();
+    });
+
+    closeLogin = function(){
+        $('#loginModal').closeModal();
+    };
+
+    closeSignup = function(){
+        $('#signupModal').closeModal();
+    };
+
+    verifyLogin = function(){
+        var password = $('#password').val();
+        var email = $('#email').val();
+
+        if(email != ''){
+            if(password != ''){
+                if(password == '123456' && email == 'lucien.lefoll@gmail.com'){
+                    $('#loginModal').closeModal();
+                    Materialize.toast('Welcome !', 3000);
+                }
+                else {
+                    Materialize.toast('Invalid Login', 3000);
+                }
+            }
+            else {
+                Materialize.toast('Please enter your password', 3000);
+            }
+        }
+        else {
+            Materialize.toast('Please enter your email', 3000);
+        }
+    };
+
+    openMap = function(){
+        $('#mapModal').openModal();
+    };
+
+    validPic = function(){
+        $('#validModal').openModal();
+    };
+
+    notValidPic = function(){
+        $('#notValidModal').openModal();
+    };
+
+    validation = function(){
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var password2 = $('#password2').val();
+
+        if(username != ''){
+            if(password != ''){
+                if(password2 != ''){
+                    if(password == password2){
+                        $('#signupModal').openModal();
+                    }
+                    else {
+                        Materialize.toast('The passwords don\'t match', 3000);
+                    }
+                }
+                else {
+                    Materialize.toast('Please verify your password', 3000);
+                }
+            }
+            else {
+                Materialize.toast('Please provide a password', 3000);
+            }
+        }
+        else{
+            Materialize.toast('Please choose a username', 3000);
+        }
+    };
+</script>
+</body>
+</html>

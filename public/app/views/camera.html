@@ -1,0 +1,42 @@
+<div class="fixed-action-btn click-to-toggle" style="bottom: 40px; right: 30px;">
+    <a class="btn-floating btn-large red">
+        <i class="large mdi-navigation-menu"></i>
+    </a>
+    <ul>
+        <li><a class="btn-floating green" onclick="validPic()" ng-click="main.changeQuest()"><i class="material-icons">done</i></a></li>
+        <li><a class="btn-floating yellow darken-1" onclick="notValidPic()"><i class="material-icons">info_outline</i></a></li>
+        <li><a class="btn-floating red" ng-href="/"><i class="material-icons">replay</i></a></li>
+    </ul>
+</div>
+<div class="modal bottom-sheet" id="validModal">
+    <div class="modal-content">
+        <div class="row">
+            <h4 class="green white-text center">Found me !</h4>
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <img src="img/pic/mooneys.jpg" alt="mooneys" class="responsive-img">
+            </div>
+            <div class="col s6">
+                <h5>Mooney's on the Quay</h5>
+                <blockquote>
+                    Wexford Town
+                </blockquote>
+                <p>
+                    High cultural place of Wexford Town, it's the pub where people gather to celebrate various things at night. Drinks 3€ on Thursday !
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal bottom-sheet" id="notValidModal">
+    <div class="modal-content">
+        <h4 class="amber white-text center">Error !</h4>
+        <p>
+            This doesn't appear to be a valid tag ! Go back to your Quest Screen to spot their location !
+        </p>
+    </div>
+</div>
+<div class="row">
+    <webcam></webcam>
+</div>

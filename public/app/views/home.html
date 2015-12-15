@@ -1,0 +1,40 @@
+<div class="col s12 m6" ng-repeat="place in main.places">
+    <div class="card">
+        <div class="card-image waves-block waves-effect waves-light">
+            <img class="activator" ng-src="img/pic/{{ place.picture }}" alt="{{ place.name }}">
+        </div>
+        <div class="card-content green" ng-if="place.complete">
+            <p class="white-text">
+                You've completed this part !
+            </p>
+                    <span class="card-title activator white-text">
+                        {{ place.name }}
+                        <i class="material-icons right">done</i>
+                    </span>
+        </div>
+        <div class="card-content amber" ng-if="!place.complete">
+            <p class="white-text">
+                There's more to discover up there !
+            </p>
+                    <span class="card-title activator white-text">
+                        {{ place.name }}
+                        <i class="material-icons right">more_vert</i>
+                    </span>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title">{{ place.name }}<i class="material-icons right">close</i></span>
+            <ul class="collection">
+                <li ng-repeat="tag in place.tags" class="collection-item" onclick="openMap()" ng-click="main.setMap(tag.coord, tag.name)">
+                    {{ tag.name }}
+                    <i class="right material-icons green-text" ng-if="tag.found">done</i>
+                    <i class="right material-icons amber-text" ng-if="!tag.found">info_outline</i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="fixed-action-btn" style="bottom: 40px; right: 30px;">
+    <a class="btn-floating btn-large green waves-effect waves-light" ng-href="/camera">
+        <i class="large material-icons">videocam</i>
+    </a>
+</div>
