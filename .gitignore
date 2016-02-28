@@ -6,6 +6,7 @@ node_modules/
 
 # Folder config file
 Desktop.ini
+.idea/
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
